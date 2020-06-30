@@ -1,0 +1,8 @@
+{
+  "name": "mbe",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "root": "apps/mbe"
+}

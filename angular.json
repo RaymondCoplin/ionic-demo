@@ -21,8 +21,48 @@
             "polyfills": "apps/mbe/src/polyfills.ts",
             "tsConfig": "apps/mbe/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/mbe/src/favicon.ico", "apps/mbe/src/assets"],
-            "styles": ["apps/mbe/src/styles.scss"],
+            "assets": [
+              "apps/mbe/src/favicon.ico",
+              "apps/mbe/src/assets",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": [
+              "apps/mbe/src/styles.scss",
+              {
+                "input": "node_modules/@ionic/angular/css/normalize.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/structure.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/typography.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/core.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/padding.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/float-elements.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/text-alignment.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/text-transformation.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/flex-utils.css"
+              },
+              {
+                "input": "apps/mbe/src/theme/variables.css"
+              }
+            ],
             "scripts": []
           },
           "configurations": {
@@ -80,7 +120,10 @@
               "apps/mbe/tsconfig.app.json",
               "apps/mbe/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/mbe/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/mbe/**"
+            ]
           }
         },
         "test": {
@@ -90,6 +133,30 @@
             "tsConfig": "apps/mbe/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "apps/mbe/src/test-setup.ts"
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "mbe:ionic-cordova-build",
+            "devServerTarget": "mbe:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "mbe:ionic-cordova-build:production",
+              "devServerTarget": "mbe:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "mbe:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "mbe:build:production"
+            }
           }
         }
       }
@@ -115,8 +182,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/mbe-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/mbe-e2e/**"]
+            "tsConfig": [
+              "apps/mbe-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/mbe-e2e/**"
+            ]
           }
         }
       }
@@ -133,6 +205,12 @@
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "jest"
+    },
+    "@ionic/angular-toolkit:component": {
+      "styleext": "scss"
+    },
+    "@ionic/angular-toolkit:page": {
+      "styleext": "scss"
     }
   },
   "defaultProject": "mbe"
